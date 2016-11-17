@@ -12,6 +12,12 @@ auth,authpriv.*                 /var/log/secure
 auth.info;authpriv.info		/var/log/auth.log
 <% end -%>
 <% end -%>
+
+<% if @log_local_custom -%>
+ # Custom fragment
+ <%= @log_local_custom %>
+<% end -%>
+
 <% if @log_local -%>
 <% if scope.lookupvar('rsyslog::log_style') == 'debian' -%>
 # First some standard log files.  Log by facility.
@@ -111,9 +117,4 @@ uucp,news.crit                 -/var/log/spooler
 
 # Save boot messages also to boot.log
 local7.*                       -/var/log/boot.log
-<% end -%>
-
-<% if @log_local_custom -%>
- # Custom fragment
- <%= @log_local_custom %>
 <% end -%>
